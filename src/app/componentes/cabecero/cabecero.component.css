@@ -1,0 +1,18 @@
+
+.navbar{
+    background-color: #9c27b0;
+    box-shadow: 0 0 15px 0 maroon;
+    
+}
+.navbar-nav .nav-link {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color:white;
+    font-family:'Open sans', sans-serif;
+    font-size: .875rem;
+}
+
+.navbar-expand-md .navbar-nav .dropdown-menu {
+    background-color: #9c27b0;
+}
+

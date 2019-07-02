@@ -1,0 +1,36 @@
+.cabecera-login{
+    background-color: #F75F13;
+    color:white;
+    font-size: 130%;
+    text-align: center;
+}
+
+#panel-login{
+    position: relative;
+    width: 400px;
+    height: auto;
+    overflow: hidden;
+    padding-top: 5%;
+}
+
+#logo-login{
+    text-align: center;
+}
+
+#card-login{
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    border-color:#F75F13;
+}
+
+.texto-derecha{
+text-align: right;
+}
+
+.texto-izquierda{
+    text-align: left;
+}
+
+.texto-centro{
+    text-align: center;
+}
