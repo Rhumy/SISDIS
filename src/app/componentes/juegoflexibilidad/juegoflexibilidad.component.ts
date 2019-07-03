@@ -9,7 +9,13 @@ export class JuegoflexibilidadComponent implements OnInit {
 
   constructor() { }
 
+  puntaje: number=0;
+  juego: string='';
+
   ngOnInit() {
+    
   }
+
+
 
 }

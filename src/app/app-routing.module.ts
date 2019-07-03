@@ -10,12 +10,18 @@ import { NoEncontradoComponent } from './componentes/no-encontrado/no-encontrado
 import { AuthGuard } from './guardianes/auth.guard';
 import { ConfiguracionGuard } from './guardianes/configuracion.guard';
 import { ClientesComponent } from './componentes/clientes/clientes.component';
+import { JuegoflexibilidadComponent } from './componentes/juegoflexibilidad/juegoflexibilidad.component';
+import { MemoriaendeticaComponent } from './componentes/memoriaendetica/memoriaendetica.component';
+import { JuegomemoriaComponent } from './componentes/juegomemoria/juegomemoria.component';
 
 const routes: Routes = [
   {path: 'cliente', component: TableroComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'registrarse', component: RegistroComponent, canActivate: [ConfiguracionGuard]},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard]},
+  {path: 'juegoflexibilidad', component: JuegoflexibilidadComponent, canActivate: [AuthGuard]},
+  {path: 'memoriaendetica', component: MemoriaendeticaComponent, canActivate: [AuthGuard]},
+  {path: 'juegomemoria', component: JuegomemoriaComponent, canActivate: [AuthGuard]},
   {path: 'cliente/editar/:id', component: EditarClienteComponent, canActivate: [AuthGuard]},
   {path: '', component: ClientesComponent, canActivate: [AuthGuard]},
   {path: '**', component: NoEncontradoComponent},

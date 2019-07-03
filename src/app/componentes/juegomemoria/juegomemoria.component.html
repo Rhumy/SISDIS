@@ -1,3 +1,99 @@
-<p>
-  juegomemoria works!
-</p>
+<div class="container">
+  <div class="widget ">
+    <div class="row">
+      <div class="col-md-6 ">
+        <h2 class="mx-auto ">Juego de Memoria</h2>
+      </div>
+        <label for="email" class="col-md-3 my-2 text-right " >Puntaje</label>
+        <div class="col-md-3">
+          <input type="text" placeholder="Puntaje Obtenido" class="form-control" id="text">
+        </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br>
+<div class="container">
+  <div class="widget ">
+
+    <div class="row">
+      <div class="col-md-12 mx-auto" style="text-align: center;" id="mostradorPalabras">
+        <input type="text" name="palabras" id="palabras" class="col-md-12 count-num" >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mx-auto" id="radios">
+
+        <div class="row">
+          <div class="col-md-4 mx-auto" style="text-align: center;">
+            <h3 class="mx-auto">¿Qué pais salió dos veces?</h3>
+          </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+          <div class="col-md-5">
+            
+          </div>
+          <div  class="col-md-2" style="text-align: left; padding-left: 50px;">
+            <div class="form-check">
+              <label class="form-check-label" >
+                <input type="radio" class="form-check-input" name="optradio">Colombia
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">Venezuela
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">Grecia
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">Honduras
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">Australia
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">Jamaica
+              </label>
+            </div>
+          </div>
+          <div class="col-md-5">
+            
+          </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+          <div class="col-md-2 mx-auto">
+              <a href="SDJuego4.html" class="btn btn-sm btn-success btn-block">Siguiente</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+      <div class="col-md-12 mx-auto" style="text-align: center;" id="titulo3">
+        <h4>Preste atención a los siguientes paises y responda la pregunta</h4>
+      </div>
+      <br><br>
+      <div class="col-md-2 mx-auto">
+        <button type="button" class="btn btn-sm btn-success btn-block" onclick="empezarTest()" id="botonIniciaTest">Iniciar Test</button>           
+        <div id="count_num" class="mx-auto count-num" ></div>
+      </div>
+    </div>
+  </div>
+</div>
