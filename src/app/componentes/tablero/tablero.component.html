@@ -1,0 +1,28 @@
+<div class="container my-4">
+    <select class="custom-select" (change)="onChange($event.target.value)">
+        <option value="Global" selected>Global</option>
+        <option value="Memoria Endetica">Memoria Endetica</option>
+        <option value="Memoria">Memoria</option>
+        <option value="Flexibilidad">Flexibilidad</option>
+    </select>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Ranking</th>
+                <th>Usuario</th>
+                <th>Puntaje</th>
+                <th>Juego</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios; index as i ">
+                <th scrope="row">{{i+1}}</th>
+                <td>{{usuario.nickname}}</td>
+                <td>{{usuario.puntaje}}</td>
+                <td>{{usuario.juego}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

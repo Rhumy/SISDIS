@@ -142,7 +142,7 @@ export class MemoriaendeticaComponent implements OnInit {
       this.respuesta = null;
       this.empezarTest();
     } else {
-      this.usuario.juego = 'J1';
+      this.usuario.juego = 'Memoria Endetica';
       this.usuario.nickname= this.loggedInUser;
       this.usuario.puntaje= this.puntaje;
       this.enviaPuntaje.enviaPuntaje(this.usuario).subscribe(
@@ -154,7 +154,7 @@ export class MemoriaendeticaComponent implements OnInit {
           );
         }
       );
-      this.emailPojo.emailSubject = 'Puntaje Obtenido';
+      this.emailPojo.emailSubject = 'Puntaje Obtenido en Juego de Memoria Endetica';
       this.emailPojo.fromEmail = "raul.jimenez1@unmsm.edu.pe";
       this.emailPojo.fromName = "Grupo Sistemas Distribuidos";
       this.emailPojo.message = "Ha obtenido "+this.puntaje + " puntos";

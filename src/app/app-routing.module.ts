@@ -21,6 +21,7 @@ const routes: Routes = [
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard]},
   {path: 'juegoflexibilidad', component: JuegoflexibilidadComponent, canActivate: [AuthGuard]},
   {path: 'memoriaendetica', component: MemoriaendeticaComponent, canActivate: [AuthGuard]},
+  {path: 'ranking', component: TableroComponent, canActivate: [AuthGuard]},
   {path: 'juegomemoria', component: JuegomemoriaComponent, canActivate: [AuthGuard]},
   {path: 'cliente/editar/:id', component: EditarClienteComponent, canActivate: [AuthGuard]},
   {path: '', component: ClientesComponent, canActivate: [AuthGuard]},

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Usuario } from '../../modelo/usuario.model';
+import { emailPojo } from '../../modelo/emailPojo.model';
+import { LoginService } from '../../servicios/login.service';
+import { EnviaPuntajeServicio } from '../../servicios/envia-puntaje.service';
+import { EnviaCorreoServicio } from '../../servicios/envia-correo.service';
 
 
 @Component({
@@ -18,14 +23,46 @@ export class JuegomemoriaComponent implements OnInit {
   posicionRandom: number;
   cantidadOpciones: number = 6;
   opciones: string[] = [];
+  tiempoAparicion: number = 500;
 
   puntaje: number = 0;
-  constructor() { }
+
+  usuario: Usuario = {
+    nickname:'',
+    juego:'',
+    puntaje:0
+  };
+  emailPojo: emailPojo = {
+    toName:'',
+    toEmail:'',
+    fromName:'',
+    fromEmail:'',
+    emailSubject:'',
+    message:''
+  };
+  isLoggedIn: boolean;
+  loggedInUser: string;
+
+  constructor(private loginService: LoginService,
+    private enviaPuntaje: EnviaPuntajeServicio,
+    private enviaCorreo: EnviaCorreoServicio) { }
 
   ngOnInit() {
-    this.iniciarTodo();
+    this.obtenerLogin();
   }
 
+  obtenerLogin(){
+    this.iniciarTodo();
+    this.loginService.getAuth().subscribe( auth => {
+      if(auth){
+        this.isLoggedIn = true;
+        this.loggedInUser = auth.email;
+      }
+      else{
+        this.isLoggedIn = false;
+      }
+    });
+  }
   iniciarTodo(){
     this.inicializarPaises();
     this.cantidadPalabras = this.paises.length;
@@ -72,7 +109,7 @@ export class JuegomemoriaComponent implements OnInit {
               $('#palabras').val(this.paises[contadorPalabrasLocal]);
             contadorPalabrasLocal++;
           }
-        }, 500);
+        }, this.tiempoAparicion);
       } else {
         
         this.contador = countLocal;
@@ -109,20 +146,35 @@ export class JuegomemoriaComponent implements OnInit {
     });
   }
   obtenerNumeroRandom(){
-    return Math.floor(Math.random()*this.cantidadPalabras);
+    return Math.floor(Math.random() * this.cantidadPalabras);
+  }
+  enviarCorreo(){
+    this.emailPojo.emailSubject = 'Puntaje Obtenido en Juego de Memoria';
+      this.emailPojo.fromEmail = "raul.jimenez1@unmsm.edu.pe";
+      this.emailPojo.fromName = "Grupo Sistemas Distribuidos";
+      this.emailPojo.message = "Ha obtenido "+this.puntaje + " puntos";
+      this.emailPojo.toEmail = this.loggedInUser;
+      this.emailPojo.toName = ".....";
+      this.enviaCorreo.sendMail(this.emailPojo).subscribe();
   }
   guardarRespuesta(){
     if(this.respuesta == this.paises[this.posicionRandom]){
       Swal.fire('Ganó','Correcto :\')','success');
       this.puntaje++;
+      if(this.tiempoAparicion >=250)  //Aumenta la dificultad hasta que cada palabra espera 250 milisegundos
+        this.tiempoAparicion-=20;
       this.paises = [];
       this.opciones=[];
       this.iniciarTodo();
       // Enviar a la nube
     }
     else{
+      this.usuario.juego = 'Memoria';
+      this.usuario.nickname= this.loggedInUser;
+      this.usuario.puntaje= this.puntaje;
+      this.enviaPuntaje.enviaPuntaje(this.usuario).subscribe();
+      this.enviarCorreo();
       Swal.fire('Perdió','Incorrecto :\'(','error');
-      
     }
   }
 }

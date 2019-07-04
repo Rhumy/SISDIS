@@ -34,6 +34,7 @@ import { MemoriaendeticaComponent } from './componentes/memoriaendetica/memoriae
 import { JuegoflexibilidadComponent } from './componentes/juegoflexibilidad/juegoflexibilidad.component';
 import { JuegomemoriaComponent } from './componentes/juegomemoria/juegomemoria.component';
 import { EnviaPuntajeServicio } from './servicios/envia-puntaje.service';
+import { RecibePuntajeServicio } from './servicios/recibe-puntajes.service';
 
 
 
@@ -75,6 +76,7 @@ import { EnviaPuntajeServicio } from './servicios/envia-puntaje.service';
     ConfiguracionGuard,
     EnviaCorreoServicio,
     EnviaPuntajeServicio,
+    RecibePuntajeServicio,
     { provide: FirestoreSettingsToken, useValue:{}}
   ],
   bootstrap: [AppComponent]
