@@ -33,6 +33,7 @@ import { ChartsModule } from 'ng2-charts';
 import { MemoriaendeticaComponent } from './componentes/memoriaendetica/memoriaendetica.component';
 import { JuegoflexibilidadComponent } from './componentes/juegoflexibilidad/juegoflexibilidad.component';
 import { JuegomemoriaComponent } from './componentes/juegomemoria/juegomemoria.component';
+import { EnviaPuntajeServicio } from './servicios/envia-puntaje.service';
 
 
 
@@ -73,6 +74,7 @@ import { JuegomemoriaComponent } from './componentes/juegomemoria/juegomemoria.c
     ConfiguracionServicio,
     ConfiguracionGuard,
     EnviaCorreoServicio,
+    EnviaPuntajeServicio,
     { provide: FirestoreSettingsToken, useValue:{}}
   ],
   bootstrap: [AppComponent]

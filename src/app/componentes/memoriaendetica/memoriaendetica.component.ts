@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import Swal from 'sweetalert2'
+import { EnviaPuntajeServicio } from 'src/app/servicios/envia-puntaje.service';
+import { Usuario } from 'src/app/modelo/usuario.model';
 @Component({
   selector: 'app-memoriaendetica',
   templateUrl: './memoriaendetica.component.html',
@@ -13,12 +15,19 @@ export class MemoriaendeticaComponent implements OnInit {
   count: number = 3;
   timer: number;
   random: number;
-  respuesta:number;
-
+  respuesta: number;
+  timeLeft: number;
+  interval;
   dif: string;
   tiempoDesaparecer: number;
+  usuario: Usuario={
+    nickname:'',
+    juego:'',
+    puntaje:0
+  };
 
-  constructor() { }
+
+  constructor(private enviaPuntaje: EnviaPuntajeServicio) { }
 
   ngOnInit() {
     this.nivel_dificultad = '1';
@@ -26,22 +35,24 @@ export class MemoriaendeticaComponent implements OnInit {
     $("#panelTest").hide();
   }
 
-  timeLeft: number = 3;
-  interval;
+
 
 
 
   empezarTest() {
     $("#panelOpciones").hide();
+    $("#panelTest").hide();
+    $("#contador").show();
+    this.timeLeft = 3;
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
         this.pauseTimer();
-          
-          $("#contador").hide();
+        $("#contador").hide();
+        $("#panelNroRandom").show();
         this.test(this.nivel_dificultad);
-        this.desaparecerNumeroRandom();// ekis dedededede
+        this.desaparecerNumeroRandom();
       }
     }, 1000)
 
@@ -63,9 +74,11 @@ export class MemoriaendeticaComponent implements OnInit {
       case '3':
         return 2000;
       case '4':
+        return 1800;
+      case '5':
         return 1500;
-      case '9999':
-        return 1000;
+      case '6':
+        return 1200;
     }
   }
 
@@ -92,19 +105,31 @@ export class MemoriaendeticaComponent implements OnInit {
         break;
     }
   }
- 
+
 
   pauseTimer() {
     clearInterval(this.interval);
   }
 
 
-  calcularPuntaje(){
-    alert('hola' + this.respuesta+'-->' + this.random);
-    if(this.respuesta == this.random){
+  calcularPuntaje() {
+    if (this.respuesta == this.random) {
       this.puntaje = this.puntaje + parseInt(this.nivel_dificultad);
-      alert(this.puntaje);
+      this.respuesta = null;
+      this.empezarTest();
+    } else {
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href>Why do I have this issue?</a>'
+      });
+      this.usuario.juego = 'J1';
+      this.usuario.nickname= 'HoliBoli';
+      this.usuario.puntaje= this.puntaje;
+      console.log(this.enviaPuntaje.enviaPuntaje(this.usuario));
     }
+
   }
 
 }
