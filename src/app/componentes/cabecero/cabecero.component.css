@@ -1,6 +1,6 @@
 
 .navbar{
-    background-color: #9c27b0;
+    background-image: linear-gradient(to left top, #0a4a0f, #105014, #155718, #1a5d1d, #1f6422);
     box-shadow: 0 0 15px 0 maroon;
     
 }
@@ -13,6 +13,6 @@
 }
 
 .navbar-expand-md .navbar-nav .dropdown-menu {
-    background-color: #9c27b0;
+    background-image: linear-gradient(to left top, #0a4a0f, #105014, #155718, #1a5d1d, #1f6422);
 }
 
