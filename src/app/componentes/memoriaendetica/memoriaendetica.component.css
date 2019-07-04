@@ -7,3 +7,18 @@
     border-width: 1px;
     border-radius: 25px;
 }
+
+.panel-izq{
+    background-color: azure;
+    border-style: solid;
+    border-width: 4px;
+    border-color: green;
+}
+
+.contador{
+    color:red;
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 25%;
+    font-size: 500%;
+}
