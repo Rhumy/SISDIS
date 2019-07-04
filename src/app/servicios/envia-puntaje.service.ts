@@ -7,25 +7,25 @@ import { Usuario } from '../modelo/usuario.model';
 })
 export class EnviaPuntajeServicio {
     //apiURL = 'http://localhost:8080';
-    apiURL = 'https://sisdisapi.herokuapp.com';
+    apiURL = 'https://sisdisapi.herokuapp.com/';
 
     constructor(private http: HttpClient) { }
 
     requestOptions: Object = {
         /* other options here */
         responseType: 'text'
-    }
+    };
 
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json'
         })
-    }
+    };
 
     enviaPuntaje(usuario: Usuario): Observable<Usuario> {
 
 
-        return this.http.post<Usuario>(this.apiURL, JSON.stringify(usuario), this.requestOptions);
+        return this.http.post<Usuario>(this.apiURL, /*JSON.stringify(*/usuario/*), this.requestOptions*/);
 
     }
 

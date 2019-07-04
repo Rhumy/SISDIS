@@ -142,12 +142,11 @@ export class MemoriaendeticaComponent implements OnInit {
       this.respuesta = null;
       this.empezarTest();
     } else {
-    
       this.usuario.juego = 'J1';
       this.usuario.nickname= this.loggedInUser;
       this.usuario.puntaje= this.puntaje;
       this.enviaPuntaje.enviaPuntaje(this.usuario).subscribe(
-        emailPojo=>{
+        (emailPojo) => {
           Swal.fire(
             'Listo!',
             'Se guardo el puntaje!',
