@@ -24,15 +24,8 @@ export class EnviaPuntajeServicio {
 
     enviaPuntaje(usuario: Usuario): Observable<Usuario> {
 
-        var eachProduct = 
-            {
-                "nickname":usuario.nickname,
-                "juego":usuario.juego,
-                "puntaje":usuario.puntaje
-            };
-        console.log(JSON.stringify(usuario));
 
-        return this.http.post<Usuario>(this.apiURL,eachProduct, this.requestOptions);
+        return this.http.post<Usuario>(this.apiURL, JSON.stringify(usuario), this.requestOptions);
 
     }
 

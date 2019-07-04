@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2'
 import { EnviaPuntajeServicio } from 'src/app/servicios/envia-puntaje.service';
 import { Usuario } from 'src/app/modelo/usuario.model';
+import { LoginService } from 'src/app/servicios/login.service';
+import { emailPojo } from 'src/app/modelo/emailPojo.model';
+import { EnviaCorreoServicio } from 'src/app/servicios/envia-correo.service';
 @Component({
   selector: 'app-memoriaendetica',
   templateUrl: './memoriaendetica.component.html',
@@ -25,14 +28,35 @@ export class MemoriaendeticaComponent implements OnInit {
     juego:'',
     puntaje:0
   };
+  emailPojo: emailPojo={
+    toName:'',
+    toEmail:'',
+    fromName:'',
+    fromEmail:'',
+    emailSubject:'',
+    message:''
+  };
+  isLoggedIn: boolean;
+  loggedInUser: string;
 
 
-  constructor(private enviaPuntaje: EnviaPuntajeServicio) { }
+  constructor(private enviaPuntaje: EnviaPuntajeServicio,
+    private loginService:LoginService,
+    private enviaCorreo: EnviaCorreoServicio) { }
 
   ngOnInit() {
     this.nivel_dificultad = '1';
     this.puntaje = 0;
     $("#panelTest").hide();
+    this.loginService.getAuth().subscribe( auth => {
+      if(auth){
+        this.isLoggedIn = true;
+        this.loggedInUser = auth.email;
+      }
+      else{
+        this.isLoggedIn = false;
+      }
+    });
   }
 
 
@@ -118,16 +142,38 @@ export class MemoriaendeticaComponent implements OnInit {
       this.respuesta = null;
       this.empezarTest();
     } else {
-      Swal.fire({
-        type: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href>Why do I have this issue?</a>'
-      });
+    
       this.usuario.juego = 'J1';
-      this.usuario.nickname= 'HoliBoli';
+      this.usuario.nickname= this.loggedInUser;
       this.usuario.puntaje= this.puntaje;
-      console.log(this.enviaPuntaje.enviaPuntaje(this.usuario));
+      this.enviaPuntaje.enviaPuntaje(this.usuario).subscribe(
+        emailPojo=>{
+          Swal.fire(
+            'Listo!',
+            'Se guardo el puntaje!',
+            'success'
+          );
+        }
+      );
+      this.emailPojo.emailSubject = 'Puntaje Obtenido';
+      this.emailPojo.fromEmail = "raul.jimenez1@unmsm.edu.pe";
+      this.emailPojo.fromName = "Grupo Sistemas Distribuidos";
+      this.emailPojo.message = "Ha obtenido "+this.puntaje + " puntos";
+      this.emailPojo.toEmail = this.loggedInUser;
+      this.emailPojo.toName = ".....";
+
+
+
+      this.enviaCorreo.sendMail(this.emailPojo).subscribe(
+        emailPojo=>{
+          Swal.fire(
+            'Listo!',
+            'Se envio el correo',
+            'success'
+          );
+        }
+      );
+
     }
 
   }
